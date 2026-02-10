@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Aku Simpan Kamu di Sini</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(180deg,#0f0c29,#302b63,#24243e);
+  color:#fff;
+  overflow-x:hidden;
+}
+section{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:40px;
+  text-align:center;
+}
+h1,h2{
+  font-family:'Playfair Display',serif;
+}
+.fade{
+  opacity:0;
+  transform:translateY(20px);
+  transition:all 1.2s ease;
+}
+.fade.show{
+  opacity:1;
+  transform:translateY(0);
+}
+button{
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  background:#ffb6c1;
+  color:#000;
+  font-size:16px;
+  cursor:pointer;
+}
+input{
+  padding:12px;
+  border-radius:20px;
+  border:none;
+  text-align:center;
+  margin-top:20px;
+}
+.gallery img{
+  width:260px;
+  border-radius:20px;
+  margin:15px;
+  opacity:0;
+  transform:scale(0.95);
+  transition:all 1.5s ease;
+}
+.gallery img.show{
+  opacity:1;
+  transform:scale(1);
+}
+audio{display:none;}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+  <source src="musik.mp3" type="audio/mpeg">
+</audio>
+
+<section>
+  <h1 class="fade">Hai, sayang 🤍</h1>
+  <p class="fade">
+    Aku nggak tahu cara ngebungkus perasaan ini.<br>
+    Jadi aku simpan di sini.
+  </p>
+  <p class="fade">
+    Pelan-pelan ya…<br>
+    Ini cuma buat kamu.
+  </p>
+</section>
+
+<section>
+  <h2 class="fade">Mei 2024</h2>
+  <p class="fade">
+    Sejak bulan itu, hal kecil jadi terasa beda.<br>
+    Aku mulai nungguin namamu muncul di layar.
+  </p>
+  <p class="fade">
+    Kamu suka lupaan…<br>
+    tapi entah kenapa aku malah inget semua tentang kamu.
+  </p>
+</section>
+
+<section>
+  <h2 class="fade">Tentang Kamu</h2>
+  <p class="fade">
+    Kamu lucu waktu kepo.<br>
+    Sok santai, tapi sebenernya pengen tahu semuanya.
+  </p>
+  <p class="fade">
+    Dan tanpa sadar,<br>
+    kamu jadi rumah paling nyaman buat pikiranku.
+  </p>
+</section>
+
+<section>
+  <h2 class="fade">Kenangan Kecil</h2>
+  <div class="gallery">
+    <img src="foto1.jpg">
+    <img src="foto2.jpg">
+    <img src="foto3.jpg">
+  </div>
+</section>
+
+<section id="lock">
+  <h2 class="fade">Masuk Pake Tanggal Kita 🤍</h2>
+  <input type="password" id="pass" placeholder="DDMMYYYY">
+  <br><br>
+  <button onclick="unlock()">Buka</button>
+  <p id="error"></p>
+</section>
+
+<section id="final" style="display:none;">
+  <h2 class="fade">Bismillah</h2>
+  <p class="fade">
+    Kalau kamu sampai di sini,<br>
+    berarti kamu milih aku.
+  </p>
+  <p class="fade">
+    Aku nggak janji sempurna,<br>
+    tapi aku janji serius.
+  </p>
+  <h2 class="fade">🤍</h2>
+</section>
+
+<script>
+const fades=document.querySelectorAll('.fade');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('show');
+    }
+  });
+},{threshold:0.3});
+fades.forEach(f=>observer.observe(f));
+
+const imgs=document.querySelectorAll('.gallery img');
+imgs.forEach((img,i)=>{
+  setTimeout(()=>img.classList.add('show'),600*i);
+});
+
+function unlock(){
+  const p=document.getElementById('pass').value;
+  if(p==="26102024"){
+    document.getElementById('lock').style.display="none";
+    document.getElementById('final').style.display="flex";
+  }else{
+    document.getElementById('error').innerText="Tanggalnya salah 🤍";
+  }
+}
+</script>
+
+</body>
+</html>
